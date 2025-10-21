@@ -20,7 +20,7 @@ for m = 1:size(eta,2)
         for j = 1:length(p2) 
             p = [p1(i);p2(j)];
             [k_temp,N_temp,r_temp,k_fec_temp,N_fec_temp,r_fec_temp] = fun_opt_dk2(L,p,eta(:,m),N_total,zeta);
-            [k_int_temp,N_int_temp,r_final_temp] = myRounding(k_temp,N_temp,L,p,eta(:,m),N_total,zeta); 
+            [k_int_temp,N_int_temp,r_final_temp] = finalRounding(k_temp,N_temp,L,p,eta(:,m),N_total,zeta); 
             r_final(m,j,i) = obj0(k_int_temp',N_int_temp',p,eta(:,m));
         end
     end
@@ -43,4 +43,5 @@ legend('O-RF-CBF','O-RF','FontSize',30,'FontName','Times New Roman','Location','
 set(gca,'FontName','Times New Roman','FontSize',28)
 set(gca,'Linewidth',1)
 grid on
+
 plot3(1, 1, r_final(end,end), 'go', 'MarkerSize', 20, 'MarkerFaceColor', 'g','HandleVisibility', 'off')
