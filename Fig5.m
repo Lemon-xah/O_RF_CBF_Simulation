@@ -20,8 +20,8 @@ for i = 1:length(zeta)
     for j = 1:SampNum
         try
         [K, N, r(i,j), K_fec, N_fec, r_fec(i,j)] = fun_opt_dk0(L, p_b, eta(:,j), N_total, zeta(i)); 
-        [k_int,N_int,r_int(i,j)] = myRounding(K,N,L,p_b,eta(:,j),N_total,zeta(i));  
-        [k_fec_int,N_fec_int,r_fec_int(i,j)] = fecRounding(K_fec,N_fec,L,p_b, eta(:,j),N_total,zeta(i));
+        [k_int,N_int,r_int(i,j)] = finalRounding(K,N,L,p_b,eta(:,j),N_total,zeta(i));  
+        [k_fec_int,N_fec_int,r_fec_int(i,j)] = finalfecRounding(K_fec,N_fec,L,p_b, eta(:,j),N_total,zeta(i));
         r_final(i,j)= obj0(k_int',N_int',zeta(i),eta(:,j));
         r_fec_final(i,j)= fec0(k_fec_int',N_fec_int',eta(:,j));
         catch ME
@@ -47,4 +47,5 @@ ylabel('Uplink sum-log throughput','FontSize',64,'FontName','Times New Roman');
 legend('O-RF-CBF','O-RF','FontSize',42,'FontName','Times New Roman','Location','southwest');
 set(gca,'FontName','Times New Roman','FontSize',42)
 set(gca,'Linewidth',1.5)
+
 grid on
